@@ -1,4 +1,4 @@
-package fifthRest;
+package ws.filtering;
  
 import org.restlet.Application;
 import org.restlet.Restlet;
@@ -13,9 +13,8 @@ public class RouterApplication extends Application{
 		// Create a router Restlet that routes each call to a new respective instance of resource.
 		Router router = new Router(getContext());
 		// Defines only two routes
-		router.attach("/users", UserResource.class);
-		router.attach("/users/{uid}", UserResource.class);
-		router.attach("/users/{uid}/items", UserItemResource.class);
+		router.attach("/filter", FilterResource.class);
+		router.attach("/reservation", ReservationResource.class);
 		return router;
 	}
 }

@@ -1,0 +1,38 @@
+DROP DATABASE IF EXISTS DB_HOTEL ;
+
+CREATE DATABASE DB_HOTEL CHARACTER SET 'utf8';
+
+
+CREATE TABLE hotel (
+    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(40) NOT NULL,
+    website VARCHAR(40) NOT NULL,
+    location VARCHAR(40) NOT NULL,
+    phone_number VARCHAR(40) NOT NULL,
+    stars SMALLINT NOT NULL,
+    PRIMARY KEY (id)
+)
+ENGINE=INNODB;
+
+
+CREATE TABLE room (
+    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    price SMALLINT NOT NULL,
+    nb_place SMALLINT NOT NULL,
+    hotel_id SMALLINT NOT NULL,
+    PRIMARY KEY (id)
+)
+ENGINE=INNODB;
+
+CREATE TABLE reservation (
+    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    start_date SMALLINT NOT NULL,
+    end_date SMALLINT NOT NULL,
+    room_id SMALLINT NOT NULL,
+    PRIMARY KEY (id)
+)
+ENGINE=INNODB;
+
+
+
+INSERT INTO hotel (name , website , location ,phone_number,stars) VALUES ('HOTEL SOLLER BAY', 'www.onahotels.com', 'Espagne, Mallorca', '0598562903', 4);
