@@ -26,13 +26,38 @@ ENGINE=INNODB;
 
 CREATE TABLE reservation (
     id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    start_date SMALLINT NOT NULL,
-    end_date SMALLINT NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
     room_id SMALLINT NOT NULL,
+    customer_id SMALLINT NOT NULL,
     PRIMARY KEY (id)
 )
 ENGINE=INNODB;
 
 
+CREATE TABLE customer (
+    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(40) NOT NULL,
+    pwd VARCHAR(40) NOT NULL,
+    PRIMARY KEY (id)
+)
+ENGINE=INNODB;
+
 
 INSERT INTO hotel (name , website , location ,phone_number,stars) VALUES ('HOTEL SOLLER BAY', 'www.onahotels.com', 'Espagne, Mallorca', '0598562903', 4);
+INSERT INTO hotel (name , website , location ,phone_number,stars) VALUES ('HOTEL OSAKA TOWER', 'www.osakahotel.jp', 'Japon, Osaka', '0698409312', 5);
+INSERT INTO hotel (name , website , location ,phone_number,stars) VALUES ('HOTEL LOW EAST', 'www.unhotelpascher.com', 'France, Brest', '07934604', 2);
+INSERT INTO hotel (name , website , location ,phone_number,stars) VALUES ('HOTEL PARIS', 'www.parishotel.com', 'France, Paris', '0155879900', 4);
+
+INSERT INTO room (price, nb_place, hotel_id) VALUES (85, 2, 1);
+INSERT INTO room (price, nb_place, hotel_id) VALUES (120, 3, 1);
+INSERT INTO room (price, nb_place, hotel_id) VALUES (240, 2, 2);
+
+INSERT INTO customer (name, pwd) VALUES ('lucas','test');
+INSERT INTO customer (name, pwd) VALUES ('val','test');
+
+
+INSERT INTO reservation(start_date, end_date, room_id, customer_id) VALUES ('2019-12-12', '2019-12-20', 1, 1);
+INSERT INTO reservation(start_date, end_date, room_id, customer_id) VALUES ('2019-12-12', '2019-12-20', 2, 1);
+INSERT INTO reservation(start_date, end_date, room_id, customer_id) VALUES ('2019-12-12', '2019-12-20', 3, 1);
+
