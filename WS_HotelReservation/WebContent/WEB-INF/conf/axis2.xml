@@ -31,6 +31,20 @@
     <parameter name="attachmentDIR"></parameter>
     <parameter name="sizeThreshold">4000</parameter-->
 
+    <parameter name="EnableChildFirstClassLoading">false</parameter>
+
+    <!--
+    The exposeServiceMetadata parameter decides whether the metadata (WSDL, schema, policy) of
+    the services deployed on Axis2 should be visible when ?wsdl, ?wsdl2, ?xsd, ?policy requests
+    are received.
+    This parameter can be defined in the axi2.xml file, in which case this will be applicable
+    globally, or in the services.xml files, in which case, it will be applicable to the
+    Service groups and/or services, depending on the level at which the parameter is declared.
+    This value of this parameter defaults to true.
+    -->
+    <parameter name="exposeServiceMetadata">true</parameter>
+
+
     <!--Uncomment if you want to plugin your own attachments lifecycle implementation -->
     <!--<attachmentsLifecycleManager class="org.apache.axiom.attachments.lifecycle.impl.LifecycleManagerImpl"/>-->
 
@@ -105,6 +119,12 @@
     <!-- use this parameter to override autodetected url -->
     <!--<parameter name="httpFrontendHostUrl">https://someotherhost/context</parameter>-->
 
+    <!--By default, JAXWS services are created by reading annotations. WSDL and schema are generated-->
+    <!--using a separate WSDL generator only when ?wsdl is called. Therefore, even if you engage-->
+    <!--policies etc.. to AxisService, it doesn't appear in the WSDL. By setting the following property-->
+    <!--to true, you can create the AxisService using the generated WSDL and remove the need for a-->
+    <!--WSDL generator. When ?wsdl is called, WSDL is generated in the normal way.-->
+    <parameter name="useGeneratedWSDLinJAXWS">false</parameter>
 
     <!--    The way of adding listener to the system-->
     <!--    <listener class="org.apache.axis2.ObserverIMPL">-->
@@ -200,24 +220,13 @@
         <!-- <parameter name="threadKeepAliveTimeUnit">MILLISECONDS</parameter>            -->
     </transportReceiver>
 
-    <!--Uncomment if you want to have TCP transport support-->
-    <!--transportReceiver name="tcp"
-                       class="org.apache.axis2.transport.tcp.TCPServer">
-        <parameter name="port">6060</parameter-->>
-    <!--If you want to give your own host address for EPR generation-->
-    <!--uncomment the following paramter , and set it as you required.-->
-    <!--<parameter name="hostname">tcp://myApp.com/ws</parameter>-->
-    <!-- /transportReceiver -->
+    <!-- This is where you'd put custom transports.  See the transports project -->
+    <!-- for more.  http://ws.apache.org/commons/transport                      -->
 
     <!-- ================================================= -->
     <!-- Transport Outs -->
     <!-- ================================================= -->
 
-    <!--Uncomment if you want to have TCP transport support-->
-    <!--
-    <transportSender name="tcp"
-                     class="org.apache.axis2.transport.tcp.TCPTransportSender"/>
-    -->
     <transportSender name="local"
                      class="org.apache.axis2.transport.local.LocalTransportSender"/>
     <transportSender name="http"
@@ -254,38 +263,19 @@
     <!-- Clustering  -->
     <!-- ================================================= -->
     <!--
-     To enable clustering for this node, set the value of "enable" attribute of the "cluster"
-     element to "true". The initilization of a node in the cluster is handled by the class
-     corresponding to the "class" attribute of the "cluster" element. It is also responsible for
+     To enable clustering for this node, set the value of "enable" attribute of the "clustering"
+     element to "true". The initialization of a node in the cluster is handled by the class
+     corresponding to the "class" attribute of the "clustering" element. It is also responsible for
      getting this node to join the cluster.
      -->
-    <cluster class="org.apache.axis2.clustering.tribes.TribesClusterManager" enable="false">
+    <clustering class="org.apache.axis2.clustering.tribes.TribesClusteringAgent" enable="false">
 
         <!--
-           This parameter indicates whther the cluster has to be automatically initalized
+           This parameter indicates whether the cluster has to be automatically initalized
            when the AxisConfiguration is built. If set to "true" the initialization will not be
            done at that stage, and some other party will have to explictly initialize the cluster.
         -->
         <parameter name="AvoidInitiation">true</parameter>
-
-        <!--
-           Indicates whether this member is active or not. This will be useful in a setup where
-           members are deployed in ACTIVE and/or PASSIVE configuration 
-        -->
-        <parameter name="isActive">true</parameter>
-
-        <!--
-           An implementation of org.apache.axis2.clustering.MembershipListener
-           which will be called on membership changes
-        -->
-        <!--
-        <parameter name="membershipListener">
-            <class>org.apache.axis2.clustering.MembershipListenerImpl</class>
-            <properties>
-                <property name="foo">bar</property>
-            </properties>
-        </parameter>
-        -->
 
         <!--
            The membership scheme used in this setup. The only values supported at the moment are
@@ -306,13 +296,7 @@
          The clustering domain/group. Nodes in the same group will belong to the same multicast
          domain. There will not be interference between nodes in different groups.
         -->
-        <parameter name="domain">apache.axis2.domain</parameter>
-
-        <!--
-        This parameter is only valid when the "mode" parameter is set to application. This indicates
-        the domain in which the the applications being load balanced are deployed.
-        -->
-        <parameter name="applicationDomain">apache.axis2.application.domain</parameter>
+        <parameter name="domain">wso2.carbon.domain</parameter>
 
         <!--
            When a Web service request is received, and processed, before the response is sent to the
@@ -370,6 +354,14 @@
         <parameter name="atmostOnceMessageSemantics">true</parameter>
 
         <!--
+        Properties specific to this member
+        -->
+        <parameter name="properties">
+            <property name="backendServerURL" value="https://${hostName}:${httpsPort}/services/"/>
+            <property name="mgtConsoleURL" value="https://${hostName}:${httpsPort}/"/>
+        </parameter>
+
+        <!--
            The list of static or well-known members. These entries will only be valid if the
            "membershipScheme" above is set to "wka"
         -->
@@ -385,35 +377,25 @@
         </members>
 
         <!--
-        Enable the load balancer entry if you need to run this node as a load balancer.
-        Multiple application domains with different LoadBalanceEventHandler implementations
+        Enable the groupManagement entry if you need to run this node as a cluster manager.
+        Multiple application domains with different GroupManagementAgent implementations
         can be defined in this section.
         -->
-        <loadBalancer enable="false">
+        <groupManagement enable="false">
             <applicationDomain name="apache.axis2.application.domain"
-                               handler="org.apache.axis2.clustering.DefaultLoadBalanceEventHandler"/>
-        </loadBalancer>
+                               description="Axis2 group"
+                               agent="org.apache.axis2.clustering.management.DefaultGroupManagementAgent"/>
+        </groupManagement>
 
         <!--
-           This interface is responsible for handling configuration management.
-           Configuraion changes include:
-
-            1. Rebooting an entire cluster, in which case, all nodes have to load the new
-               Axis2 configuration in a consistent manner
-            2. Deploying a new service to a cluster or undeploying a service from a cluster
-            3. Changing the policies of a service deployed on the cluster
-
-            The "enable" attribute indicates whether Configuration management has been enabled
+           This interface is responsible for handling management of a specific node in the cluster
+           The "enable" attribute indicates whether Node management has been enabled
         -->
-        <configurationManager
-                class="org.apache.axis2.clustering.configuration.DefaultConfigurationManager"
-                enable="true">
-            <listener
-                    class="org.apache.axis2.clustering.configuration.DefaultConfigurationManagerListener"/>
-        </configurationManager>
+        <nodeManager class="org.apache.axis2.clustering.management.DefaultNodeManager"
+                         enable="true"/>
 
         <!--
-           This interface is responsible for handling context replication. The property changes in
+           This interface is responsible for handling state replication. The property changes in
            the Axis2 context hierarchy in this node, are propagated to all other nodes in the cluster.
 
            The "excludes" patterns can be used to specify the prefixes (e.g. local_*) or
@@ -422,27 +404,25 @@
 
             The "enable" attribute indicates whether context replication has been enabled
         -->
-        <contextManager class="org.apache.axis2.clustering.context.DefaultContextManager"
-                        enable="true">
-            <listener class="org.apache.axis2.clustering.context.DefaultContextManagerListener"/>
+        <stateManager class="org.apache.axis2.clustering.state.DefaultStateManager"
+                      enable="true">
             <replication>
                 <defaults>
                     <exclude name="local_*"/>
                     <exclude name="LOCAL_*"/>
                 </defaults>
                 <context class="org.apache.axis2.context.ConfigurationContext">
-                    <exclude name="UseAsyncOperations"/>
-                    <exclude name="SequencePropertyBeanMap"/>
+                    <exclude name="local_*"/>
                 </context>
                 <context class="org.apache.axis2.context.ServiceGroupContext">
-                    <exclude name="my.sandesha.*"/>
+                    <exclude name="local_*"/>
                 </context>
                 <context class="org.apache.axis2.context.ServiceContext">
-                    <exclude name="my.sandesha.*"/>
+                    <exclude name="local_*"/>
                 </context>
             </replication>
-        </contextManager>
-    </cluster>
+        </stateManager>
+    </clustering>
 
     <!-- ================================================= -->
     <!-- Phases  -->
