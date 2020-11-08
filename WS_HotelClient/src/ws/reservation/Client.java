@@ -1,8 +1,12 @@
 package ws.reservation;
 
 import java.io.Console;
+import java.rmi.RemoteException;
+import java.util.Scanner;
 
 import org.apache.axis2.AxisFault;
+
+import ws.reservation.ReservationStub.MakeReservationResponse;
 
 public class Client {
 	
@@ -16,12 +20,15 @@ public class Client {
 		
 		System.out.println("1) Check hostels availability");
 		System.out.println("2) Make a reservation");
-		String choice = values.readLine("Choice : ");
 		
-		if(choice == "1") {
+		Scanner choiceS = new Scanner(System.in);
+		//String choice = values.readLine("Choice : ");
+		int choice = Integer.parseInt(choiceS.nextLine());
+		
+		if(choice == 1) {
 			System.out.println("You have chosen : Check hostels availability");
 		}
-		else if(choice == "2") {
+		else if(choice == 2) {
 			System.out.println("You have chosen : Make a reservation");
 			MakeReservation(stub, values, customer_id);
 		}
@@ -32,48 +39,65 @@ public class Client {
 	public static void MakeReservation(ReservationStub stub, Console values, String customer_id)
 	{
 		ReservationStub.MakeReservation informations = new ReservationStub.MakeReservation();
+		Scanner datas = new Scanner(System.in);
 		
 		//makeReservation(String customer_id, String room_id, String start_date, String end_date)
-		String room_id = values.readLine("Id of the room : ");
-		String start = values.readLine("Start date (dd-mm-yyyy) : ");
-		String end = values.readLine("End date (dd-mm-yyyy) : ");
-		
-		
-		//fonctionne
+		System.out.println("Id of the room : ");
+		String room_id = datas.nextLine();
+		System.out.println("Start date (dd-mm-yyyy) : ");
+		String start = datas.nextLine();
+		System.out.println("End date (dd-mm-yyyy) : ");
+		String end = datas.nextLine();
+			
 		informations.setCustomer_id(customer_id);
+		informations.setRoom_id(room_id);
+		informations.setStart_date(start);
+		informations.setEnd_date(end);
 		
-		//fonctionne pas
-		informations.customer_id(customer_id);
-		informations.room_id(room_id);
-		informations.start_date(start);
-		informations.end_date(end);
-		
-		ReservationStub.MakeReservationResponse response = stub.makeReservation(informations);
-		
-		String result = response.toString();
-		System.out.println(result);	
+		MakeReservationResponse response;
+		try {
+			response = stub.makeReservation(informations);
+			String result = response.toString();
+			System.out.println(result);	
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	public static void listHotel(ReservationStub stub, Console values, String customer_id)
+	public static void listHotel(ReservationStub stub, Console values)
 	{
 		ReservationStub.ListHotel informations = new ReservationStub.ListHotel();
+		Scanner datas = new Scanner(System.in);
+		
 		//listHotel(String max_price, String nb_place,String location,String start_date, String end_date)
 		
-		String max_price = values.readLine("Max room price : ");
-		String room_count = values.readLine("Number of rooms : ");
-		String location = values.readLine("Asked city : ");
-		String start = values.readLine("Start date (dd-mm-yyyy) : ");
-		String end = values.readLine("End date (dd-mm-yyyy) : ");
+		System.out.println("Max room price : ");
+		String max_price = datas.nextLine();
+		System.out.println("Number of rooms : ");
+		String room_count = datas.nextLine();
+		System.out.println("Asked city : ");
+		String location = datas.nextLine();
+		System.out.println("Start date (dd-mm-yyyy) : ");
+		String start = datas.nextLine();
+		System.out.println("End date (dd-mm-yyyy) : ");
+		String end = datas.nextLine();
 		
-		informations.customer_id(customer_id);
-		informations.max_price(max_price);
-		informations.nb_place(room_count);
-		informations.location(location);
-		informations.start_date(start);
-		informations.end_date(end);
+		informations.setMax_price(max_price);
+		informations.setNb_place(room_count);
+		informations.setLocation(location);
+		informations.setStart_date(start);
+		informations.setEnd_date(end);
 		
-		ReservationStub.ListHotelResponse response = stub.listHotel(informations);
-		
-		String result = response.toString();
-		System.out.println(result);	
+		ReservationStub.ListHotelResponse response;
+		try {
+			response = stub.listHotel(informations);
+			String result = response.toString();
+			System.out.println(result);	
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
