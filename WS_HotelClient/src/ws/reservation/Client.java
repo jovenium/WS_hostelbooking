@@ -38,6 +38,11 @@ public class Client {
 		String start = values.readLine("Start date (dd-mm-yyyy) : ");
 		String end = values.readLine("End date (dd-mm-yyyy) : ");
 		
+		
+		//fonctionne
+		informations.setCustomer_id(customer_id);
+		
+		//fonctionne pas
 		informations.customer_id(customer_id);
 		informations.room_id(room_id);
 		informations.start_date(start);

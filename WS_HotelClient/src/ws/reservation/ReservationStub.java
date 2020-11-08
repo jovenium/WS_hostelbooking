@@ -1,3 +1,4 @@
+
 /**
  * ReservationStub.java
  *
@@ -106,6 +107,9 @@
                 targetEndpoint));
         _serviceClient.getOptions().setUseSeparateListener(useSeparateListener);
         
+            //Set the soap version
+            _serviceClient.getOptions().setSoapVersionURI(org.apache.axiom.soap.SOAP12Constants.SOAP_ENVELOPE_NAMESPACE_URI);
+        
     
     }
 
@@ -114,7 +118,7 @@
      */
     public ReservationStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"http://localhost:8080/WS_HotelReservation/services/Reservation.ReservationHttpEndpoint/" );
+                    this(configurationContext,"http://127.0.0.1:8081/WS_hotelReservation/services/Reservation.ReservationHttpSoap12Endpoint/" );
                 
     }
 
@@ -123,7 +127,7 @@
      */
     public ReservationStub() throws org.apache.axis2.AxisFault {
         
-                    this("http://localhost:8080/WS_HotelReservation/services/Reservation.ReservationHttpEndpoint/" );
+                    this("http://127.0.0.1:8081/WS_hotelReservation/services/Reservation.ReservationHttpSoap12Endpoint/" );
                 
     }
 
@@ -158,22 +162,12 @@
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
                org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
-              _operationClient.getOptions().setAction("\"\"");
+              _operationClient.getOptions().setAction("urn:makeReservation");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
               
               
                   addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_LOCATION,"Reservation/makeReservation");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.ENABLE_REST,true);
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.HTTP_METHOD,"POST");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.CONTENT_TYPE,"application/x-www-form-urlencoded");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.MESSAGE_TYPE,"application/x-www-form-urlencoded");
               
 
               // create a message context
@@ -282,22 +276,12 @@
                 throws java.rmi.RemoteException{
 
               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
-             _operationClient.getOptions().setAction("\"\"");
+             _operationClient.getOptions().setAction("urn:makeReservation");
              _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
               
               
                   addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_LOCATION,"Reservation/makeReservation");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.ENABLE_REST,true);
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.HTTP_METHOD,"POST");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.CONTENT_TYPE,"application/x-www-form-urlencoded");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.MESSAGE_TYPE,"application/x-www-form-urlencoded");
               
 
 
@@ -443,22 +427,12 @@
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
                org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
-              _operationClient.getOptions().setAction("\"\"");
+              _operationClient.getOptions().setAction("urn:listHotel");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
               
               
                   addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_LOCATION,"Reservation/listHotel");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.ENABLE_REST,true);
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.HTTP_METHOD,"POST");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.CONTENT_TYPE,"application/x-www-form-urlencoded");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.MESSAGE_TYPE,"application/x-www-form-urlencoded");
               
 
               // create a message context
@@ -567,22 +541,12 @@
                 throws java.rmi.RemoteException{
 
               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
-             _operationClient.getOptions().setAction("\"\"");
+             _operationClient.getOptions().setAction("urn:listHotel");
              _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
               
               
                   addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_LOCATION,"Reservation/listHotel");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.ENABLE_REST,true);
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.HTTP_METHOD,"POST");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.CONTENT_TYPE,"application/x-www-form-urlencoded");
-              
-                  addPropertyToOperationClient(_operationClient,org.apache.axis2.Constants.Configuration.MESSAGE_TYPE,"application/x-www-form-urlencoded");
               
 
 
@@ -738,7 +702,7 @@
         }
         return false;
     }
-     //http://localhost:8080/WS_HotelReservation/services/Reservation.ReservationHttpEndpoint/
+     //http://127.0.0.1:8081/WS_hotelReservation/services/Reservation.ReservationHttpSoap12Endpoint/
         public static class ListHotelResponse
         implements org.apache.axis2.databinding.ADBBean{
         
@@ -757,6 +721,50 @@
         }
 
         
+
+                        /**
+                        * field for _return
+                        */
+
+                        
+                                    protected java.lang.String local_return ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean local_returnTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String get_return(){
+                               return local_return;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param _return
+                               */
+                               public void set_return(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          local_returnTracker = true;
+                                       } else {
+                                          local_returnTracker = true;
+                                              
+                                       }
+                                   
+                                            this.local_return=param;
+                                    
+
+                               }
+                            
 
      /**
      * isReaderMTOMAware
@@ -854,7 +862,41 @@
 
                
                    }
-               
+                if (local_returnTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"return", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"return");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("return");
+                                    }
+                                
+
+                                          if (local_return==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(local_return);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -1016,7 +1058,13 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                
+                 if (local_returnTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "return"));
+                                 
+                                         elementList.add(local_return==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(local_return));
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -1091,7 +1139,34 @@
                  
                     
                     reader.next();
-                  
+                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","return").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.set_return(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             
@@ -1146,6 +1221,182 @@
         }
 
         
+
+                        /**
+                        * field for Customer_id
+                        */
+
+                        
+                                    protected java.lang.String localCustomer_id ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localCustomer_idTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getCustomer_id(){
+                               return localCustomer_id;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Customer_id
+                               */
+                               public void setCustomer_id(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localCustomer_idTracker = true;
+                                       } else {
+                                          localCustomer_idTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localCustomer_id=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Room_id
+                        */
+
+                        
+                                    protected java.lang.String localRoom_id ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localRoom_idTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getRoom_id(){
+                               return localRoom_id;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Room_id
+                               */
+                               public void setRoom_id(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localRoom_idTracker = true;
+                                       } else {
+                                          localRoom_idTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localRoom_id=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Start_date
+                        */
+
+                        
+                                    protected java.lang.String localStart_date ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localStart_dateTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getStart_date(){
+                               return localStart_date;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Start_date
+                               */
+                               public void setStart_date(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localStart_dateTracker = true;
+                                       } else {
+                                          localStart_dateTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localStart_date=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for End_date
+                        */
+
+                        
+                                    protected java.lang.String localEnd_date ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localEnd_dateTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getEnd_date(){
+                               return localEnd_date;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param End_date
+                               */
+                               public void setEnd_date(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localEnd_dateTracker = true;
+                                       } else {
+                                          localEnd_dateTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localEnd_date=param;
+                                    
+
+                               }
+                            
 
      /**
      * isReaderMTOMAware
@@ -1243,7 +1494,143 @@
 
                
                    }
-               
+                if (localCustomer_idTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"customer_id", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"customer_id");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("customer_id");
+                                    }
+                                
+
+                                          if (localCustomer_id==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localCustomer_id);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localRoom_idTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"room_id", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"room_id");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("room_id");
+                                    }
+                                
+
+                                          if (localRoom_id==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localRoom_id);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localStart_dateTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"start_date", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"start_date");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("start_date");
+                                    }
+                                
+
+                                          if (localStart_date==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localStart_date);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localEnd_dateTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"end_date", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"end_date");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("end_date");
+                                    }
+                                
+
+                                          if (localEnd_date==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localEnd_date);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -1405,7 +1792,31 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                
+                 if (localCustomer_idTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "customer_id"));
+                                 
+                                         elementList.add(localCustomer_id==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCustomer_id));
+                                    } if (localRoom_idTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "room_id"));
+                                 
+                                         elementList.add(localRoom_id==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localRoom_id));
+                                    } if (localStart_dateTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "start_date"));
+                                 
+                                         elementList.add(localStart_date==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localStart_date));
+                                    } if (localEnd_dateTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "end_date"));
+                                 
+                                         elementList.add(localEnd_date==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localEnd_date));
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -1480,7 +1891,115 @@
                  
                     
                     reader.next();
-                  
+                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","customer_id").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setCustomer_id(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","room_id").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setRoom_id(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","start_date").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setStart_date(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","end_date").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setEnd_date(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             
@@ -1523,6 +2042,50 @@
         }
 
         
+
+                        /**
+                        * field for _return
+                        */
+
+                        
+                                    protected java.lang.String local_return ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean local_returnTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String get_return(){
+                               return local_return;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param _return
+                               */
+                               public void set_return(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          local_returnTracker = true;
+                                       } else {
+                                          local_returnTracker = true;
+                                              
+                                       }
+                                   
+                                            this.local_return=param;
+                                    
+
+                               }
+                            
 
      /**
      * isReaderMTOMAware
@@ -1620,7 +2183,41 @@
 
                
                    }
-               
+                if (local_returnTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"return", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"return");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("return");
+                                    }
+                                
+
+                                          if (local_return==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(local_return);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -1782,7 +2379,13 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                
+                 if (local_returnTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "return"));
+                                 
+                                         elementList.add(local_return==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(local_return));
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -1857,7 +2460,34 @@
                  
                     
                     reader.next();
-                  
+                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","return").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.set_return(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             
@@ -1900,6 +2530,226 @@
         }
 
         
+
+                        /**
+                        * field for Max_price
+                        */
+
+                        
+                                    protected java.lang.String localMax_price ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localMax_priceTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getMax_price(){
+                               return localMax_price;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Max_price
+                               */
+                               public void setMax_price(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localMax_priceTracker = true;
+                                       } else {
+                                          localMax_priceTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localMax_price=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Nb_place
+                        */
+
+                        
+                                    protected java.lang.String localNb_place ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localNb_placeTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getNb_place(){
+                               return localNb_place;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Nb_place
+                               */
+                               public void setNb_place(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localNb_placeTracker = true;
+                                       } else {
+                                          localNb_placeTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localNb_place=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Location
+                        */
+
+                        
+                                    protected java.lang.String localLocation ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localLocationTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getLocation(){
+                               return localLocation;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Location
+                               */
+                               public void setLocation(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localLocationTracker = true;
+                                       } else {
+                                          localLocationTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localLocation=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Start_date
+                        */
+
+                        
+                                    protected java.lang.String localStart_date ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localStart_dateTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getStart_date(){
+                               return localStart_date;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Start_date
+                               */
+                               public void setStart_date(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localStart_dateTracker = true;
+                                       } else {
+                                          localStart_dateTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localStart_date=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for End_date
+                        */
+
+                        
+                                    protected java.lang.String localEnd_date ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localEnd_dateTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getEnd_date(){
+                               return localEnd_date;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param End_date
+                               */
+                               public void setEnd_date(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localEnd_dateTracker = true;
+                                       } else {
+                                          localEnd_dateTracker = true;
+                                              
+                                       }
+                                   
+                                            this.localEnd_date=param;
+                                    
+
+                               }
+                            
 
      /**
      * isReaderMTOMAware
@@ -1997,7 +2847,177 @@
 
                
                    }
-               
+                if (localMax_priceTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"max_price", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"max_price");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("max_price");
+                                    }
+                                
+
+                                          if (localMax_price==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localMax_price);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localNb_placeTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"nb_place", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"nb_place");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("nb_place");
+                                    }
+                                
+
+                                          if (localNb_place==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localNb_place);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localLocationTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"location", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"location");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("location");
+                                    }
+                                
+
+                                          if (localLocation==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localLocation);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localStart_dateTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"start_date", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"start_date");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("start_date");
+                                    }
+                                
+
+                                          if (localStart_date==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localStart_date);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localEnd_dateTracker){
+                                    namespace = "http://reservation.ws";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"end_date", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"end_date");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("end_date");
+                                    }
+                                
+
+                                          if (localEnd_date==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localEnd_date);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -2159,7 +3179,37 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                
+                 if (localMax_priceTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "max_price"));
+                                 
+                                         elementList.add(localMax_price==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMax_price));
+                                    } if (localNb_placeTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "nb_place"));
+                                 
+                                         elementList.add(localNb_place==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localNb_place));
+                                    } if (localLocationTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "location"));
+                                 
+                                         elementList.add(localLocation==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localLocation));
+                                    } if (localStart_dateTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "start_date"));
+                                 
+                                         elementList.add(localStart_date==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localStart_date));
+                                    } if (localEnd_dateTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://reservation.ws",
+                                                                      "end_date"));
+                                 
+                                         elementList.add(localEnd_date==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localEnd_date));
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -2234,7 +3284,142 @@
                  
                     
                     reader.next();
-                  
+                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","max_price").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setMax_price(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","nb_place").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setNb_place(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","location").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setLocation(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","start_date").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setStart_date(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://reservation.ws","end_date").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setEnd_date(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             
