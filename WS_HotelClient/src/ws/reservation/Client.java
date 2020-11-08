@@ -112,8 +112,14 @@ public class Client {
 		String room_id,start,end;
 		
 		//makeReservation(String customer_id, String room_id, String start_date, String end_date)
+		
+		do {
 		System.out.println("Id of the room : ");
 		room_id = datas.nextLine();
+		if(room_id != null) {
+			System.out.print("Room id not be null");
+		}
+		}while(room_id != null);
 		
 		do { //NE VEUT PAS BOUCLER SANS AUCUNE RAISON
 			System.out.println("Start date (dd-mm-yyyy) : ");
@@ -147,7 +153,7 @@ public class Client {
 		boolean verification_dates = false;
 		boolean verification_prices = false;
 		
-		String start, end, room_count,max_price;
+		String start, end, room_count,max_price, location;
 		//listHotel(String max_price, String nb_place,String location,String start_date, String end_date)
 		
 		do {
@@ -162,8 +168,13 @@ public class Client {
 			verification_places = placeChecking(room_count);
 		} while(verification_places = false);
 		
+		do {
 		System.out.println("Asked city : ");
-		String location = datas.nextLine();
+		location = datas.nextLine();
+		if(location != null) {
+			System.out.print("Location not be null");
+		}
+		}while(location != null);
 
 		do { //NE VEUT PAS BOUCLER
 			System.out.println("Start date (dd-mm-yyyy) : ");
