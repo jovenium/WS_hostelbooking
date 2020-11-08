@@ -116,10 +116,10 @@ public class Client {
 		do {
 		System.out.println("Id of the room : ");
 		room_id = datas.nextLine();
-		if(room_id != null) {
-			System.out.print("Room id not be null");
+		if(room_id == null) {
+			System.out.println("Room id not be null");
 		}
-		}while(room_id != null);
+		}while(room_id == null);
 		
 		do { //NE VEUT PAS BOUCLER SANS AUCUNE RAISON
 			System.out.println("Start date (dd-mm-yyyy) : ");
@@ -171,10 +171,10 @@ public class Client {
 		do {
 		System.out.println("Asked city : ");
 		location = datas.nextLine();
-		if(location != null) {
-			System.out.print("Location not be null");
+		if(location == null) {
+			System.out.println("Location not be null");
 		}
-		}while(location != null);
+		}while(location == null);
 
 		do { //NE VEUT PAS BOUCLER
 			System.out.println("Start date (dd-mm-yyyy) : ");
