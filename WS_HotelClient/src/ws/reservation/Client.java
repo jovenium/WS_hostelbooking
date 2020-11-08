@@ -2,6 +2,8 @@ package ws.reservation;
 
 import java.io.Console;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import org.apache.axis2.AxisFault;
@@ -27,6 +29,7 @@ public class Client {
 		
 		if(choice == 1) {
 			System.out.println("You have chosen : Check hostels availability");
+			listHotel(stub, values);
 		}
 		else if(choice == 2) {
 			System.out.println("You have chosen : Make a reservation");
@@ -36,18 +39,89 @@ public class Client {
 			System.out.println("No choice selected");
 		}
 	}
+	
+	private static boolean dateChecking(String start_date, String end_date) { 
+	    Date start = null;
+	    Date end = null;
+	    boolean response = false;
+	    
+		try {
+			start = new SimpleDateFormat("dd-MM-yyyy").parse(start_date);
+		} catch (java.text.ParseException e1) {
+			// TODO Auto-generated catch block
+			//e1.printStackTrace();
+		}
+		try {
+			end = new SimpleDateFormat("dd-MM-yyyy").parse(end_date);
+		} catch (java.text.ParseException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}  
+		if(start != null && end_date != null) 
+		{
+		int different = start.compareTo(end);
+		if(different > 0 ) {
+			System.out.println("Error in the selected dates, End date must be after Start date");
+			response = false;
+		}
+		else {
+			System.out.println("Dates of Start and End for reservation are ok");
+			response = true;
+		}
+		}
+		else {
+			System.out.println("Dates can't be null");
+			response = false;
+		}
+		return response;
+	}
+	private static boolean placeChecking(String nb_place) {
+		boolean response = false;
+		
+		int count = Integer.parseInt(nb_place);  
+		if(count <= 0) {
+			System.out.println("Error in number of place(s) choosen it must be at least of 1");
+			response = false;
+		}
+		else {
+			response = true;
+		}
+		return response;
+	}
+	
+	private static boolean maxPriceChecking(String max_price) {
+		boolean response = false;
+		
+		int price = Integer.parseInt(max_price);  
+		if(price <= 0) {
+			System.out.println("Maximum price can't be negative of null");
+			response = false;
+		}
+		else {
+			response = true;
+		}
+		return response;
+	}
+	
 	public static void MakeReservation(ReservationStub stub, Console values, String customer_id)
 	{
 		ReservationStub.MakeReservation informations = new ReservationStub.MakeReservation();
 		Scanner datas = new Scanner(System.in);
+		boolean verification_dates = false;
+		
+		String room_id,start,end;
 		
 		//makeReservation(String customer_id, String room_id, String start_date, String end_date)
 		System.out.println("Id of the room : ");
-		String room_id = datas.nextLine();
-		System.out.println("Start date (dd-mm-yyyy) : ");
-		String start = datas.nextLine();
-		System.out.println("End date (dd-mm-yyyy) : ");
-		String end = datas.nextLine();
+		room_id = datas.nextLine();
+		
+		do { //NE VEUT PAS BOUCLER SANS AUCUNE RAISON
+			System.out.println("Start date (dd-mm-yyyy) : ");
+			start = datas.nextLine();
+			System.out.println("End date (dd-mm-yyyy) : ");
+			end = datas.nextLine();
+			verification_dates = dateChecking(start, end);
+		} while(verification_dates = false);
 			
 		informations.setCustomer_id(customer_id);
 		informations.setRoom_id(room_id);
@@ -69,19 +143,35 @@ public class Client {
 	{
 		ReservationStub.ListHotel informations = new ReservationStub.ListHotel();
 		Scanner datas = new Scanner(System.in);
+		boolean verification_places = false;
+		boolean verification_dates = false;
+		boolean verification_prices = false;
 		
+		String start, end, room_count,max_price;
 		//listHotel(String max_price, String nb_place,String location,String start_date, String end_date)
 		
-		System.out.println("Max room price : ");
-		String max_price = datas.nextLine();
-		System.out.println("Number of rooms : ");
-		String room_count = datas.nextLine();
+		do {
+			System.out.println("Max room price : ");
+			max_price = datas.nextLine();
+			verification_prices = maxPriceChecking(max_price);
+		} while(verification_prices = false);
+		
+		do {
+			System.out.println("Number of rooms : ");
+			room_count = datas.nextLine();
+			verification_places = placeChecking(room_count);
+		} while(verification_places = false);
+		
 		System.out.println("Asked city : ");
 		String location = datas.nextLine();
-		System.out.println("Start date (dd-mm-yyyy) : ");
-		String start = datas.nextLine();
-		System.out.println("End date (dd-mm-yyyy) : ");
-		String end = datas.nextLine();
+
+		do { //NE VEUT PAS BOUCLER
+			System.out.println("Start date (dd-mm-yyyy) : ");
+			start = datas.nextLine();
+			System.out.println("End date (dd-mm-yyyy) : ");
+			end = datas.nextLine();
+			verification_dates = dateChecking(start, end);
+		} while(verification_dates = false);
 		
 		informations.setMax_price(max_price);
 		informations.setNb_place(room_count);
