@@ -128,7 +128,10 @@ public class Client {
 			end = datas.nextLine();
 			verification_dates = dateChecking(start, end);
 		} while(verification_dates = false);
-			
+		
+		start = convertionTime(start);
+		end = convertionTime(end);
+		
 		informations.setCustomer_id(customer_id);
 		informations.setRoom_id(room_id);
 		informations.setStart_date(start);
@@ -184,6 +187,9 @@ public class Client {
 			verification_dates = dateChecking(start, end);
 		} while(verification_dates = false);
 		
+		start = convertionTime(start);
+		end = convertionTime(end);
+		
 		informations.setMax_price(max_price);
 		informations.setNb_place(room_count);
 		informations.setLocation(location);
@@ -200,5 +206,16 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private static String convertionTime(String time) {
+		String day = time.substring(0, 2);
+		String month = time.substring(3, 5);
+		String year = time.substring(6, 10);
+		String newDate = year+"-"+month+"-"+day;
+		
+		//System.out.println("Old date :"+time);
+		//System.out.println("New date :"+newDate);
+		return newDate;
 	}
 }
