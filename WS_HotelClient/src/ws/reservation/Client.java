@@ -20,6 +20,7 @@ public class Client {
 		//Set up connection with customer and get his id
 		String customer_id = "0000";
 		
+		while(true) {
 		System.out.println("1) Check hostels availability");
 		System.out.println("2) Make a reservation");
 		
@@ -38,8 +39,10 @@ public class Client {
 		else {
 			System.out.println("No choice selected");
 		}
+		}
 	}
 	
+	//Method to check if date filled are correct to make a research
 	private static boolean dateChecking(String start_date, String end_date) { 
 	    Date start = null;
 	    Date end = null;
@@ -75,6 +78,7 @@ public class Client {
 		}
 		return response;
 	}
+	//Method to check if number of place filled is positive and isn't null
 	private static boolean placeChecking(String nb_place) {
 		boolean response = false;
 		
@@ -88,7 +92,7 @@ public class Client {
 		}
 		return response;
 	}
-	
+	//Method to check if max price filled is positive and isn't null
 	private static boolean maxPriceChecking(String max_price) {
 		boolean response = false;
 		
@@ -180,9 +184,9 @@ public class Client {
 		}while(location == null);
 
 		do { //NE VEUT PAS BOUCLER
-			System.out.println("Start date (dd-mm-yyyy) : ");
+			System.out.println("Start date (dd/mm/yyyy) : ");
 			start = datas.nextLine();
-			System.out.println("End date (dd-mm-yyyy) : ");
+			System.out.println("End date (dd/mm/yyyy) : ");
 			end = datas.nextLine();
 			verification_dates = dateChecking(start, end);
 		} while(verification_dates = false);
@@ -208,6 +212,7 @@ public class Client {
 		}
 	}
 
+	//Method to convert date format asked to database format needed
 	private static String convertionTime(String time) {
 		String day = time.substring(0, 2);
 		String month = time.substring(3, 5);
