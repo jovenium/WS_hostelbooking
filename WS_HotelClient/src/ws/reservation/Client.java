@@ -12,6 +12,8 @@ import ws.reservation.ReservationStub.MakeReservationResponse;
 
 public class Client {
 	
+	private static Scanner choiceS = new Scanner(System.in);
+	
 	public static void main(String[] args) throws AxisFault
 	{
 		ReservationStub stub = new ReservationStub();
@@ -24,7 +26,6 @@ public class Client {
 		System.out.println("1) Check hostels availability");
 		System.out.println("2) Make a reservation");
 		
-		Scanner choiceS = new Scanner(System.in);
 		//String choice = values.readLine("Choice : ");
 		int choice = Integer.parseInt(choiceS.nextLine());
 		
@@ -60,6 +61,8 @@ public class Client {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}  
+		
+		//START ET END_DATE ?????????????
 		if(start != null && end_date != null) 
 		{
 		int different = start.compareTo(end);
@@ -110,7 +113,6 @@ public class Client {
 	public static void MakeReservation(ReservationStub stub, Console values, String customer_id)
 	{
 		ReservationStub.MakeReservation informations = new ReservationStub.MakeReservation();
-		Scanner datas = new Scanner(System.in);
 		boolean verification_dates = false;
 		
 		String room_id,start,end;
@@ -119,7 +121,7 @@ public class Client {
 		
 		do {
 		System.out.println("Id of the room : ");
-		room_id = datas.nextLine();
+		room_id = choiceS.nextLine();
 		if(room_id == null) {
 			System.out.println("Room id not be null");
 		}
@@ -127,11 +129,11 @@ public class Client {
 		
 		do { //NE VEUT PAS BOUCLER SANS AUCUNE RAISON
 			System.out.println("Start date (dd-mm-yyyy) : ");
-			start = datas.nextLine();
+			start = choiceS.nextLine();
 			System.out.println("End date (dd-mm-yyyy) : ");
-			end = datas.nextLine();
+			end = choiceS.nextLine();
 			verification_dates = dateChecking(start, end);
-		} while(verification_dates = false);
+		} while(verification_dates == false);
 		
 		start = convertionTime(start);
 		end = convertionTime(end);
@@ -155,7 +157,7 @@ public class Client {
 	public static void listHotel(ReservationStub stub, Console values)
 	{
 		ReservationStub.ListHotel informations = new ReservationStub.ListHotel();
-		Scanner datas = new Scanner(System.in);
+		
 		boolean verification_places = false;
 		boolean verification_dates = false;
 		boolean verification_prices = false;
@@ -165,19 +167,19 @@ public class Client {
 		
 		do {
 			System.out.println("Max room price : ");
-			max_price = datas.nextLine();
+			max_price = choiceS.nextLine();
 			verification_prices = maxPriceChecking(max_price);
-		} while(verification_prices = false);
+		} while(verification_prices == false);
 		
 		do {
 			System.out.println("Number of rooms : ");
-			room_count = datas.nextLine();
+			room_count = choiceS.nextLine();
 			verification_places = placeChecking(room_count);
-		} while(verification_places = false);
+		} while(verification_places == false);
 		
 		do {
 		System.out.println("Asked city : ");
-		location = datas.nextLine();
+		location = choiceS.nextLine();
 		if(location == null) {
 			System.out.println("Location not be null");
 		}
@@ -185,11 +187,12 @@ public class Client {
 
 		do { //NE VEUT PAS BOUCLER
 			System.out.println("Start date (dd/mm/yyyy) : ");
-			start = datas.nextLine();
+			start = choiceS.nextLine();
 			System.out.println("End date (dd/mm/yyyy) : ");
-			end = datas.nextLine();
+			end = choiceS.nextLine();
+			System.out.println("test");
 			verification_dates = dateChecking(start, end);
-		} while(verification_dates = false);
+		} while(verification_dates == false);
 		
 		start = convertionTime(start);
 		end = convertionTime(end);
