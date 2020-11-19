@@ -2,6 +2,7 @@ package ws.reservation;
 
 import java.io.Console;
 import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class Client {
 	
 	public static void main(String[] args) throws AxisFault
 	{
+		int choice;
 		ReservationStub stub = new ReservationStub();
 		Console values = System.console();
 		
@@ -26,8 +28,8 @@ public class Client {
 		System.out.println("1) Check hostels availability");
 		System.out.println("2) Make a reservation");
 		
-		//String choice = values.readLine("Choice : ");
-		int choice = Integer.parseInt(choiceS.nextLine());
+		try {
+			choice = Integer.parseInt(choiceS.nextLine());
 		
 		if(choice == 1) {
 			System.out.println("You have chosen : Check hostels availability");
@@ -41,6 +43,10 @@ public class Client {
 			System.out.println("No choice selected");
 		}
 		}
+		catch (NumberFormatException e) {
+			System.out.println("You must choose an integer, 1 or 2");
+		}
+	}
 	}
 	
 	//Method to check if date filled are correct to make a research
@@ -49,63 +55,70 @@ public class Client {
 	    Date end = null;
 	    boolean response = false;
 	    
-		try {
-			start = new SimpleDateFormat("dd-MM-yyyy").parse(start_date);
-		} catch (java.text.ParseException e1) {
-			// TODO Auto-generated catch block
-			//e1.printStackTrace();
-		}
-		try {
-			end = new SimpleDateFormat("dd-MM-yyyy").parse(end_date);
-		} catch (java.text.ParseException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}  
+			try {
+				System.out.println(start_date);
+				System.out.println(end_date);
+				start = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
+				end = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
+				if(start != null && end != null) 
+				{
+					int different = start.compareTo(end);
+					if(different > 0 ) {
+						System.out.println("Error in the selected dates, End date must be after Start date");
+						response = false;
+					}
+					else {
+						System.out.println("Dates of Start and End for reservation are ok");
+						response = true;
+					}
+				}
+				else {
+					System.out.println("Dates Start and End must not be null");
+					response = false;
+				}
+			} catch (ParseException e) {
+				System.out.println("Dates formats are wrong");
+			}
 		
-		//START ET END_DATE ?????????????
-		if(start != null && end_date != null) 
-		{
-		int different = start.compareTo(end);
-		if(different > 0 ) {
-			System.out.println("Error in the selected dates, End date must be after Start date");
-			response = false;
-		}
-		else {
-			System.out.println("Dates of Start and End for reservation are ok");
-			response = true;
-		}
-		}
-		else {
-			System.out.println("Dates can't be null");
-			response = false;
-		}
 		return response;
 	}
 	//Method to check if number of place filled is positive and isn't null
 	private static boolean placeChecking(String nb_place) {
 		boolean response = false;
 		
-		int count = Integer.parseInt(nb_place);  
-		if(count <= 0) {
-			System.out.println("Error in number of place(s) choosen it must be at least of 1");
+		try {
+			int count = Integer.parseInt(nb_place);  
+			if(count <= 0) {
+				System.out.println("Error in number of place(s) choosen it must be at least of 1");
+				response = false;
+			}
+			else {
+				response = true;
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
 			response = false;
-		}
-		else {
-			response = true;
+			System.out.println("Number of place(s) must be an integer number");
 		}
 		return response;
 	}
 	//Method to check if max price filled is positive and isn't null
 	private static boolean maxPriceChecking(String max_price) {
 		boolean response = false;
+		int price;
 		
-		int price = Integer.parseInt(max_price);  
-		if(price <= 0) {
-			System.out.println("Maximum price can't be negative of null");
+		try {
+			price = Integer.parseInt(max_price);
+			if(price <= 0) {
+				System.out.println("Maximum price can't be negative of null");
+				response = false;
+			}
+			else {
+				response = true;
+			}
+		} catch (NumberFormatException e) {
 			response = false;
-		}
-		else {
-			response = true;
+			System.out.println("Price must be an integer number");	
 		}
 		return response;
 	}
@@ -114,6 +127,7 @@ public class Client {
 	{
 		ReservationStub.MakeReservation informations = new ReservationStub.MakeReservation();
 		boolean verification_dates = false;
+		boolean verification_room_id = false;
 		
 		String room_id,start,end;
 		
@@ -122,15 +136,13 @@ public class Client {
 		do {
 		System.out.println("Id of the room : ");
 		room_id = choiceS.nextLine();
-		if(room_id == null) {
-			System.out.println("Room id not be null");
-		}
-		}while(room_id == null);
+		verification_room_id = room_idChecking(room_id);
+		}while(verification_room_id == false);
 		
-		do { //NE VEUT PAS BOUCLER SANS AUCUNE RAISON
-			System.out.println("Start date (dd-mm-yyyy) : ");
+		do {
+			System.out.println("Start date (dd/mm/yyyy) : ");
 			start = choiceS.nextLine();
-			System.out.println("End date (dd-mm-yyyy) : ");
+			System.out.println("End date (dd/mm/yyyy) : ");
 			end = choiceS.nextLine();
 			verification_dates = dateChecking(start, end);
 		} while(verification_dates == false);
@@ -150,8 +162,7 @@ public class Client {
 			System.out.println(result);	
 			
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Connection error to Reservation Webservice");	
 		}
 	}
 	public static void listHotel(ReservationStub stub, Console values)
@@ -161,6 +172,7 @@ public class Client {
 		boolean verification_places = false;
 		boolean verification_dates = false;
 		boolean verification_prices = false;
+		boolean verification_location = false;
 		
 		String start, end, room_count,max_price, location;
 		//listHotel(String max_price, String nb_place,String location,String start_date, String end_date)
@@ -180,10 +192,8 @@ public class Client {
 		do {
 		System.out.println("Asked city : ");
 		location = choiceS.nextLine();
-		if(location == null) {
-			System.out.println("Location not be null");
-		}
-		}while(location == null);
+		verification_location = locationChecking(location);
+		}while(verification_location == false);
 
 		do { //NE VEUT PAS BOUCLER
 			System.out.println("Start date (dd/mm/yyyy) : ");
@@ -210,9 +220,34 @@ public class Client {
 			System.out.println(result);	
 			
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Connection error to Reservation Webservice");	
 		}
+	}
+	
+	private static boolean room_idChecking(String room_id) {
+		boolean response = false;
+		
+		try {
+			int id = Integer.parseInt(room_id);
+			response = true;
+		} catch (NumberFormatException e) {
+			System.out.println("Room Id must be an number");	
+			response = false;
+		}
+		return response;
+	}
+	private static boolean locationChecking(String location) {
+		boolean response = false;
+		if(location != null) {
+			if(location.matches(".*\\d.*")== true) {
+				response = false;
+				System.out.println("The location must not be null or contain a number");
+			}
+			else {
+				response = true;
+			}
+		}
+		return response;
 	}
 
 	//Method to convert date format asked to database format needed
