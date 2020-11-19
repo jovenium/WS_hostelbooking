@@ -150,6 +150,11 @@ public class Client {
 		start = convertionTime(start);
 		end = convertionTime(end);
 		
+		System.out.println("Summary of your reservation");
+		System.out.println(customer_id);
+		System.out.println(room_id);
+		System.out.println(start);
+		System.out.println(end);
 		informations.setCustomer_id(customer_id);
 		informations.setRoom_id(room_id);
 		informations.setStart_date(start);
@@ -195,7 +200,7 @@ public class Client {
 		verification_location = locationChecking(location);
 		}while(verification_location == false);
 
-		do { //NE VEUT PAS BOUCLER
+		do {
 			System.out.println("Start date (dd/mm/yyyy) : ");
 			start = choiceS.nextLine();
 			System.out.println("End date (dd/mm/yyyy) : ");
@@ -207,6 +212,12 @@ public class Client {
 		start = convertionTime(start);
 		end = convertionTime(end);
 		
+		System.out.println("Summary of your research");
+		System.out.println(max_price);
+		System.out.println(room_count);
+		System.out.println(location);
+		System.out.println(start);
+		System.out.println(end);
 		informations.setMax_price(max_price);
 		informations.setNb_place(room_count);
 		informations.setLocation(location);
