@@ -13,7 +13,7 @@ import ws.reservation.ReservationStub.MakeReservationResponse;
 
 public class Client {
 	
-	private static Scanner choiceS = new Scanner(System.in);
+	public static Scanner choiceS = new Scanner(System.in);
 	
 	public static void main(String[] args) throws AxisFault
 	{
@@ -22,9 +22,10 @@ public class Client {
 		Console values = System.console();
 		
 		//Set up connection with customer and get his id
-		String customer_id = "0000";
+		String customer_id = AuthentCall.makeAuthent();
 		
 		while(true) {
+		System.out.println("\n##### MENU #####");
 		System.out.println("1) Check hostels availability");
 		System.out.println("2) Make a reservation");
 		
@@ -56,8 +57,8 @@ public class Client {
 	    boolean response = false;
 	    
 			try {
-				System.out.println(start_date);
-				System.out.println(end_date);
+				//System.out.println(start_date);
+				//System.out.println(end_date);
 				start = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
 				end = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
 				if(start != null && end != null) 
