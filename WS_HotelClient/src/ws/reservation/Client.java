@@ -85,20 +85,24 @@ public class Client {
 	//Method to check if number of place filled is positive and isn't null
 	private static boolean placeChecking(String nb_place) {
 		boolean response = false;
-		
-		try {
-			int count = Integer.parseInt(nb_place);  
-			if(count <= 0) {
-				System.out.println("Error in number of place(s) choosen it must be at least of 1");
+		if(nb_place == null || nb_place.equals("")){
+			nb_place="null";
+			response = true;
+		}else{
+			try {
+				int count = Integer.parseInt(nb_place);  
+				if(count <= 0) {
+					System.out.println("Error in number of place(s) choosen it must be at least of 1");
+					response = false;
+				}
+				else {
+					response = true;
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
 				response = false;
+				System.out.println("Number of place(s) must be an integer number");
 			}
-			else {
-				response = true;
-			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			response = false;
-			System.out.println("Number of place(s) must be an integer number");
 		}
 		return response;
 	}
@@ -107,18 +111,23 @@ public class Client {
 		boolean response = false;
 		int price;
 		
-		try {
-			price = Integer.parseInt(max_price);
-			if(price <= 0) {
-				System.out.println("Maximum price can't be negative of null");
+		if(max_price == null || max_price.equals("")){
+			max_price="null";
+			response = true;
+		}else{
+			try {
+				price = Integer.parseInt(max_price);
+				if(price <= 0) {
+					System.out.println("Maximum price can't be negative of null");
+					response = false;
+				}
+				else {
+					response = true;
+				}
+			} catch (NumberFormatException e) {
 				response = false;
+				System.out.println("Price must be an integer number");	
 			}
-			else {
-				response = true;
-			}
-		} catch (NumberFormatException e) {
-			response = false;
-			System.out.println("Price must be an integer number");	
 		}
 		return response;
 	}
@@ -196,16 +205,27 @@ public class Client {
 		}while(verification_location == false);
 
 		do { //NE VEUT PAS BOUCLER
-			System.out.println("Start date (dd/mm/yyyy) : ");
+			System.out.println("Start date (dd/mm/yyyy) [needed] : ");
 			start = choiceS.nextLine();
-			System.out.println("End date (dd/mm/yyyy) : ");
+			System.out.println("End date (dd/mm/yyyy) [needed] : ");
 			end = choiceS.nextLine();
-			System.out.println("test");
 			verification_dates = dateChecking(start, end);
 		} while(verification_dates == false);
 		
 		start = convertionTime(start);
 		end = convertionTime(end);
+		
+		//ajout par lucas
+		if(max_price == null || max_price.equals("")){
+			max_price="null";
+		}
+		if(room_count == null || room_count.equals("")){
+			room_count="null";
+		}
+		if(location == null || location.equals("")){
+			location="null";
+		}
+		
 		
 		informations.setMax_price(max_price);
 		informations.setNb_place(room_count);
