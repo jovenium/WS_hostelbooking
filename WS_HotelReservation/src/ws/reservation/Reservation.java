@@ -57,9 +57,9 @@ public class Reservation {
 		
 		//reformate response
 		if( response.equals("True")){
-			response = "Reservation successful";
+			response = "Reservation successful for the room "+room_id;
 		}else{
-			response = "Reservation error or the hotel "+ room_id +" is not available";
+			response = "Reservation error, the room "+ room_id +" is not available";
 		}
 		//resturn response
 		return response;

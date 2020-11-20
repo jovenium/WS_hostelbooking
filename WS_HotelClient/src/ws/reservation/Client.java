@@ -169,8 +169,8 @@ public class Client {
 		MakeReservationResponse response;
 		try {
 			response = stub.makeReservation(informations);
-			String result = response.toString();
-			System.out.println(result);	
+			String result = response.get_return();
+			System.out.println("\n"+result);	
 			
 		} catch (RemoteException e) {
 			System.out.println("Connection error to Reservation Webservice");	
@@ -273,9 +273,9 @@ public class Client {
 								}
 							
 							String line = "| "+datas[indice]+"  |  "+datas[indice+2]+"  |   "+datas[indice+4]+"|  n°"+datas[indice+5]+" |   "+datas[indice+6]+"  |  "+datas[indice+3]+"  |  "+datas[indice+1]+" |";
-							String separation = " ";
+							String separation = "";
 							for(int s=0; s<line.length();s++) {
-								separation = separation + "-";
+								separation = separation + "~";
 							}
 							System.out.println(separation);
 							System.out.println(line);
@@ -287,7 +287,7 @@ public class Client {
 					}
 				}
 			}
-			System.out.println("\n#########################################");
+			System.out.println("\n######################################");
 			System.out.println("\nYou can reserve a room by using it ID ROOM in '2) Make a reservation' Menu.");
 			
 		} catch (RemoteException e) {
