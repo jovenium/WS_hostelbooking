@@ -9,7 +9,7 @@ import java.net.URL;
 public class AuthentCall {
 
 	public static String makeAuthent(){
-		System.out.println("##### LOGIN #####");
+		System.out.println("########## LOGIN ##########");
 		String name = "";
 		String pwd = "";
 		String id = "";
@@ -28,7 +28,7 @@ public class AuthentCall {
 				if(!isValidId(id)){
 					System.out.println("Wrong Name or Password, please try again.");
 				}else{
-					System.out.println("Hey "+name+", welcome back!");
+					System.out.println("Hey "+name+", welcome back !\n");
 				}
 			}
 			

@@ -4,6 +4,7 @@ import java.io.Console;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class Client {
 		String customer_id = AuthentCall.makeAuthent();
 		
 		while(true) {
-		System.out.println("\n##### MENU #####");
+		System.out.println("\n########## MENU ##########");
 		System.out.println("1) Check hostels availability");
 		System.out.println("2) Make a reservation");
 		
@@ -226,19 +227,68 @@ public class Client {
 		if(location == null || location.equals("")){
 			location="null";
 		}
-		
-		
 		informations.setMax_price(max_price);
 		informations.setNb_place(room_count);
 		informations.setLocation(location);
 		informations.setStart_date(start);
 		informations.setEnd_date(end);
 		
+		System.out.println("\n########## START RESEARCH ##########");
 		ReservationStub.ListHotelResponse response;
 		try {
 			response = stub.listHotel(informations);
-			String result = response.toString();
-			System.out.println(result);	
+			String result = response.get_return();
+			if(result.equals("False")) {
+				System.out.println("Sorry, we haven't found a room for you according to your criteria\n\nI'm sure you will find an other room !");
+			}
+			else {
+				int nb_room = ((result.split(";")).length)/10;
+				System.out.println("\nThere is "+nb_room+" room founded : \n");
+				String [] datas = result.split(";");
+				System.out.println("       HOTEL                      CITY             PLACE    ID ROOM     PRICE     PHONE NUMBER        WEBSITE\n");
+				for(int i=0; i<nb_room;i++) {
+					for(int y=0;y<10;y++) {
+						int [] size = {0, 2, 4, 5, 6, 3, 1};
+						int indice = y + (i*10);
+
+						if(y == 1) {
+							for(int z = 0; z < 5; z++) {
+								int lenght;
+								int [] lenghtTab = { 5, 20 };
+								if(z == 2 || z == 3 || z == 4 || z == 5) {
+									lenght = lenghtTab[0];
+									if( z == 4) {
+										datas[indice+size[z]] = datas[indice+size[z]]+"€";
+									}
+								}
+								else {
+									lenght = lenghtTab[1];
+								}
+								if(datas[indice+size[z]].length() < lenght) {
+									int add = lenght - datas[indice+size[z]].length();
+										for(int t = 0 ; t < add; t++) {
+											datas[indice+size[z]] = datas[indice+size[z]]+" ";
+											}
+										}
+								}
+							
+							String line = "| "+datas[indice]+"  |  "+datas[indice+2]+"  |   "+datas[indice+4]+"|  n°"+datas[indice+5]+" |   "+datas[indice+6]+"  |  "+datas[indice+3]+"  |  "+datas[indice+1]+" |";
+							String separation = " ";
+							for(int s=0; s<line.length();s++) {
+								separation = separation + "-";
+							}
+							System.out.println(separation);
+							System.out.println(line);
+							if(i == nb_room-1) {
+								System.out.println(separation);
+							}
+							
+						}
+					}
+				}
+			}
+			System.out.println("\n#########################################");
+			System.out.println("\nYou can reserve a room by using it ID ROOM in '2) Make a reservation' Menu.");
 			
 		} catch (RemoteException e) {
 			System.out.println("Connection error to Reservation Webservice");	

@@ -31,7 +31,7 @@ public class DatabaseService {
 		}
         try {
         	String url = "jdbc:mysql://localhost:3306/DB_HOTEL?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-			DatabaseService.co = DriverManager.getConnection(url,"root","root");
+			DatabaseService.co = DriverManager.getConnection(url,"root","Azerty123456@");
 			DatabaseService.stmt = DatabaseService.co.createStatement() ;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
