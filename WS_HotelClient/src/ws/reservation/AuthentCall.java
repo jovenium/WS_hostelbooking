@@ -24,8 +24,9 @@ public class AuthentCall {
 			if(isValidInput(name,pwd)){
 				//faire requete
 				id = callAuthent(name,pwd);
-				//System.out.println("id authent:" + id);
-				if(!isValidId(id)){
+				if(id.equals("erreur connexion bd")){
+					System.out.println("ERROR Authent. Please contact your me.");
+				}else if(!isValidId(id)){
 					System.out.println("Wrong Name or Password, please try again.");
 				}else{
 					System.out.println("Hey "+name+", welcome back !\n");
@@ -80,7 +81,7 @@ public class AuthentCall {
 	}
 
 	private static boolean isValidId(String id) {
-		if(id.length()>=1 && !id.equals("False") ){
+		if(id.length()>=1 && !id.equals("False") && !id.equals("erreur connexion bd")){
 			return true;
 		}
 		return false;

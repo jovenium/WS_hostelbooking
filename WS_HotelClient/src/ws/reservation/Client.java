@@ -145,15 +145,15 @@ public class Client {
 		//makeReservation(String customer_id, String room_id, String start_date, String end_date)
 		
 		do {
-		System.out.println("Id of the room : ");
+		System.out.println("Id of the room [needed] : ");
 		room_id = choiceS.nextLine();
 		verification_room_id = room_idChecking(room_id);
 		}while(verification_room_id == false);
 		
 		do {
-			System.out.println("Start date (dd/mm/yyyy) : ");
+			System.out.println("Start date (dd/mm/yyyy) [needed] : ");
 			start = choiceS.nextLine();
-			System.out.println("End date (dd/mm/yyyy) : ");
+			System.out.println("End date (dd/mm/yyyy) [needed] : ");
 			end = choiceS.nextLine();
 			verification_dates = dateChecking(start, end);
 		} while(verification_dates == false);
@@ -245,7 +245,7 @@ public class Client {
 				int nb_room = ((result.split(";")).length)/10;
 				System.out.println("\nThere is "+nb_room+" room founded : \n");
 				String [] datas = result.split(";");
-				System.out.println("       HOTEL                      CITY             PLACE    ID ROOM     PRICE     PHONE NUMBER        WEBSITE\n");
+				System.out.println("       HOTEL                      CITY             BED(S)   ID ROOM  PRICE(EUR)   PHONE NUMBER        WEBSITE\n");
 				for(int i=0; i<nb_room;i++) {
 					for(int y=0;y<10;y++) {
 						int [] size = {0, 2, 4, 5, 6, 3, 1};
@@ -257,9 +257,9 @@ public class Client {
 								int [] lenghtTab = { 5, 20 };
 								if(z == 2 || z == 3 || z == 4 || z == 5) {
 									lenght = lenghtTab[0];
-									if( z == 4) {
+									/*if( z == 4) {
 										datas[indice+size[z]] = datas[indice+size[z]]+"€";
-									}
+									}*/
 								}
 								else {
 									lenght = lenghtTab[1];
@@ -272,7 +272,7 @@ public class Client {
 										}
 								}
 							
-							String line = "| "+datas[indice]+"  |  "+datas[indice+2]+"  |   "+datas[indice+4]+"|  n°"+datas[indice+5]+" |   "+datas[indice+6]+"  |  "+datas[indice+3]+"  |  "+datas[indice+1]+" |";
+							String line = "| "+datas[indice]+"  |  "+datas[indice+2]+"  |   "+datas[indice+4]+"|   "+datas[indice+5]+" |   "+datas[indice+6]+"  |  "+datas[indice+3]+"  |  "+datas[indice+1]+" |";
 							String separation = "";
 							for(int s=0; s<line.length();s++) {
 								separation = separation + "~";

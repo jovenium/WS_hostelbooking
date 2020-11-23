@@ -28,7 +28,7 @@ public class ConnexionResource extends ServerResource {
  
         Statement t = DatabaseService.getStatement();
         if(t == null){
-        	return new StringRepresentation("erreur connexion",  
+        	return new StringRepresentation("erreur connexion bd",  
 		            MediaType.TEXT_PLAIN);
         }
         System.out.println("findIdByNameAndPWD");
