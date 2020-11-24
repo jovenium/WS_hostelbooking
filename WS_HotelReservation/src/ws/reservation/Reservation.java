@@ -1,13 +1,25 @@
 package ws.reservation;
 
-import java.util.regex.Pattern;
-
-import org.restlet.representation.Representation;
 
 import filterinteraction.ClientCall;
 
-
+/**
+ * WS_HotelReservation sous Axis2
+ * @author Lucas Vauterin & Valentin Eloy
+ *
+ */
 public class Reservation {
+	/**
+	 * Retourne la liste des chambres correspondants aux parametres de la requete
+	 * @route /listHotel
+	 * @method GET
+	 * @param max_price
+	 * @param nb_place
+	 * @param location
+	 * @param start_date
+	 * @param end_date
+	 * @return String concatenation des hotels et des chambres
+	 */
 	public String listHotel(String max_price, String nb_place,String location,String start_date, String end_date){
 		//On verifie les entrees
 		System.out.println("listHOTEL");
@@ -27,10 +39,19 @@ public class Reservation {
 		//On appelle filter WS et on recupere la reponse contenant la liste des chambres d'hotel
 		String response = ClientCall.filterQuery(max_price, nb_place, location, start_date, end_date);
 		
-		//On envoi la reponse au client
+		//On envoie la reponse au client
 		return response;
 	}
 	
+	/**
+	 * @route /makeReservation
+	 * @method POST
+	 * @param customer_id
+	 * @param room_id
+	 * @param start_date
+	 * @param end_date
+	 * @return vrai ou faux/ reservation reussi ou non
+	 */
 	public String makeReservation(String customer_id, String room_id, String start_date, String end_date){
 		//On verifie la conformite des entrees
 		if(customer_id == null){

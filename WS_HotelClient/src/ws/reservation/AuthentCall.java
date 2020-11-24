@@ -6,8 +6,17 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * 
+ * @author Lucas Vauterin & Valentin Eloy
+ *
+ */
 public class AuthentCall {
 
+	/**
+	 * 
+	 * @return String contenant l'id de l'utilisateur authentifie
+	 */
 	public static String makeAuthent(){
 		System.out.println("########## LOGIN ##########");
 		String name = "";
@@ -38,15 +47,22 @@ public class AuthentCall {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param name nom saisi par l'utilisateur
+	 * @param pwd saisi par l'utilisateur
+	 * @return l'id recuperer ou une erreur en String
+	 */
 	private static String callAuthent(String name, String pwd) {
 		try{
+			//connexion au web service authent
 			URL url = new URL("http://127.0.0.1:8081/WS_HotelAuthent/connexion");
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("POST");
-			
+			//ajout de params en post
 			String name_param="name="+name;
 			String pwd_param="&pwd="+pwd;
-			
+			//execution
 			con.setDoOutput(true);
 			OutputStream os = con.getOutputStream();
 			os.write(name_param.getBytes());
@@ -54,7 +70,7 @@ public class AuthentCall {
 			os.write(pwd_param.getBytes());
 			os.flush();
 			os.close();
-			
+			//verification du resultat
 			int responseCode;
 			responseCode = con.getResponseCode();
 			if (responseCode == HttpURLConnection.HTTP_OK) { //success
@@ -80,6 +96,11 @@ public class AuthentCall {
 		return "False";
 	}
 
+	/**
+	 * Verifie la forme du parametre id
+	 * @param id
+	 * @return boolean
+	 */
 	private static boolean isValidId(String id) {
 		if(id.length()>=1 && !id.equals("False") && !id.equals("erreur connexion bd")){
 			return true;
@@ -87,6 +108,12 @@ public class AuthentCall {
 		return false;
 	}
 
+	/**
+	 * Verifie si les input de l'utilisateur sont coherentes
+	 * @param name
+	 * @param pwd
+	 * @return boolean
+	 */
 	private static boolean isValidInput(String name, String pwd) {
 		boolean result = true;
 		if(name == null || name.equals("")){

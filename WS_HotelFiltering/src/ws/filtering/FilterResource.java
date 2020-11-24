@@ -1,32 +1,33 @@
 package ws.filtering;
  
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
-import org.restlet.data.Form;
 import org.restlet.data.MediaType;
 import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
-import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
 import service.DatabaseService;
 import service.FilterRepository;
  
+/**
+ * @author Lucas Vauterin & Valentin Eloy
+ *
+ */
 public class FilterResource extends ServerResource {  	
 
-	
+	/**
+	 * @route /filter/params
+	 * @return 
+	 */
 	@Get
-    public Representation filter() {   
-        // Parse the given representation and retrieve data
-		System.out.println("okok");
-		//String uid = (String) getRequestAttributes().get("start_date");
-         
+    public Representation filter() {         
+		//recuperation des parametres
         HashMap<String, String> hm = new HashMap<String, String>();
         hm.put("start_date", (String) getRequestAttributes().get("start_date"));  
         hm.put("end_date", (String) getRequestAttributes().get("end_date"));  
@@ -35,20 +36,28 @@ public class FilterResource extends ServerResource {
         hm.put("max_price", (String) getRequestAttributes().get("max_price")); 
         System.out.println((String) getRequestAttributes().get("max_price"));
  
-        //findHotelsAndRooms()
+        //connexion a la DB
         Statement t = DatabaseService.getStatement();
         if(t == null){
         	return new StringRepresentation("erreur connexion",  
 		            MediaType.TEXT_PLAIN);
         }
+        //requete pour recuperer les chambres disponibles
         ResultSet resultquery = FilterRepository.findHotelRoomsbyParameters(t, hm);
+        //formatage de la reponse
         String response = reformateResultQuery(resultquery);
         
+        //envoie de la reponse
         return new StringRepresentation(response,  
             MediaType.TEXT_PLAIN);
         
     }
 
+	/**
+	 * Reformate le retour fait par la bdd, formatage avec des ";" et END a la fin d'une chambre
+	 * @param rs
+	 * @return
+	 */
 	private String reformateResultQuery(ResultSet rs) {
 		String response = "";
 		System.out.println("resp : " + rs);
