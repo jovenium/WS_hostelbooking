@@ -5,13 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.restlet.data.MediaType;
-import org.restlet.representation.StringRepresentation;
-
-
+/**
+ * @author Lucas Vauterin & Valentin Eloy
+ *
+ */
 public class DatabaseService {
 	
-	private String file = "./WebContent/META-INF/filehotelrooms.csv";
 	private static Connection co ;
 	private static Statement stmt ;
 	
@@ -31,7 +30,10 @@ public class DatabaseService {
 		}
         try {
         	String url = "jdbc:mysql://localhost:3306/DB_HOTEL?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-			DatabaseService.co = DriverManager.getConnection(url,"root","root");
+			/*
+			 * ################################# ATTENTION MOT DE PASSE USER DB_HOTEL #####################
+			 */
+        	DatabaseService.co = DriverManager.getConnection(url,"root","root");
 			DatabaseService.stmt = DatabaseService.co.createStatement() ;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

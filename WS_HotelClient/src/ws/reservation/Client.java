@@ -4,7 +4,6 @@ import java.io.Console;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -12,9 +11,15 @@ import org.apache.axis2.AxisFault;
 
 import ws.reservation.ReservationStub.MakeReservationResponse;
 
+/**
+ * 
+ * @author Lucas Vauterin & Valentin Eloy
+ *
+ */
 public class Client {
 	
 	public static Scanner choiceS = new Scanner(System.in);
+	
 	//Fonction main qui lance le menu et permet au client de lancer des recherches
 	public static void main(String[] args) throws AxisFault
 	{

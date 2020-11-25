@@ -4,16 +4,21 @@ import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
  
+/**
+ * WS_HotelFiltering sous Restlet
+ * @author Lucas Vauterin & Valentin Eloy
+ *
+ */
 public class RouterApplication extends Application{
 	/**
-	 * Creates a root Restlet that will receive all incoming calls.
+	 * creations des routes
 	 */
 	@Override
 	public synchronized Restlet createInboundRoot() {
-		// Create a router Restlet that routes each call to a new respective instance of resource.
 		Router router = new Router(getContext());
-		// Defines only two routes
+		// /filter/params GET
 		router.attach("/filter/params:{max_price},{nb_place},{location},{start_date},{end_date}", FilterResource.class);
+		// /reservation POST
 		router.attach("/reservation", ReservationResource.class);
 		return router;
 	}
