@@ -3,11 +3,21 @@ package service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * 
+ * @author Lucas Vauterin & Valentin Eloy
+ *
+ */
 public class AuthentRepository {
 
+	/**
+	 * Requete vers la DB pour authentifier via nom et pwd de l'utilisateur
+	 * @param t
+	 * @param name
+	 * @param pwd
+	 * @return le resultat de la requete
+	 */
 	public static String findIdByNameAndPWD(Statement t, String name,
 			String pwd) {
 		try {

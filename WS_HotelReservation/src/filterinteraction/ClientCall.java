@@ -9,11 +9,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import org.restlet.data.Form;
-import org.restlet.representation.Representation;
-import org.restlet.resource.ClientResource;
  
+
+/**
+ * ClientCall interroge le WB_Service HotelFiltering
+ * @author Lucas Vauterin & Valentin Eloy
+ *
+ */
 public class ClientCall {
  
 	
@@ -65,7 +67,6 @@ public class ClientCall {
 
 	public static String filterQuery(String max_price, String nb_place,
 			String location, String start_date, String end_date) {
-		System.out.println("yo");
 		String url = "http://127.0.0.1:8081/WS_HotelFiltering/filter/params:"
 				+ max_price +","
 						+ nb_place +","
