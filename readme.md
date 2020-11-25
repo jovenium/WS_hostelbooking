@@ -33,7 +33,8 @@ Tutoriel :
 
 7- Un menu se lance : 
 	Dans un premier temps il nous invite à nous connecter nous vous avons créé des indentifiants :
-		Nom : projetWeb | Mot de passe : ensiie2020 
+	
+	Nom : projetWeb | Mot de passe : ensiie2020 
 
 	Ensuite un menu s'affiche vous proposant deux choix :
 
