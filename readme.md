@@ -18,7 +18,10 @@ Tutoriel :
 
 2- Importer les dossiers dans l'IDE Eclipse IEE
 
-3- Il faut installer la base de donnée
+3- Pour installer la base de donnée :
+
+	- Télécharger Mysql
+	- Importer le contenu de bdd-init.txt dans la base de donnée depuis le dossier BD_HOTEL/
 
 3- Créer un serveur Tomcat 
 
