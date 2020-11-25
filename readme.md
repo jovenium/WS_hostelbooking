@@ -1,35 +1,48 @@
-- setup db + les 2 pwd
-- setup port tomcat
-- lancement WS
-- lancement client
-- liste des routes pas WS (je les ai sur postman)
 
+### I. PRE-REQUIS
 
+a) Téléchargez le repository.
 
-/*
-        	 * ################### MOT DE PASSE UTILISATEUR MYSQL #####################
-        	 */
-        	DatabaseService.co = DriverManager.getConnection(url,"root","root");
+b) Importez les 4 projets sur l'IDE de votre choix (de préférence Eclipse IEE) et vérifiez que vous avez configurez un serveur Tomcat en version 7.0, Axis2, ainsi que JAVA en J2SE 1.5.
 
+c) Installer MySQL en version console.
 
-Tutoriel :
+<br/>
+<br/>
 
-1- Importer les dossiers du Github.
+### II. BASE DE DONNEES
 
-2- Importer les dossiers dans l'IDE Eclipse IEE
+a) Ouvrez le fichier ```/DB_HOTEL/bdd-init.txt``` puis copiez son contenu et collez le sur votre console MySQL. Cela mettra en place la base de données pour vous avec un ensemble de données tests.
 
-3- Il faut installer la base de donnée
+b) Ouvrez les fichiers ```WS_hostelbooking/WS_HotelFiltering/src/service/DatabaseService.java``` ainsi que ```WS_hostelbooking/WS_HotelAuthent/src/service/DatabaseService.java``` et remplacez l'utilisateur et le mot de passe d'accès à la base de données, par vos identifiants MySQL :
 
-3- Créer un serveur Tomcat 
+```
+DatabaseService.co = DriverManager.getConnection(url,"user","password");
+```
 
-4- Ouvrir le dossier du serveur Tomcat / ouvrir server.xml / à la ligne 64 modifier le port : port="8081"
+<br/>
+<br/>
 
-5- Créer un web-service, cocher "Axis 2" et selectionner l'ensemble des web-services : - WS_HotelAuthent
-										       - WS_HotelClient
-										       - WS_HotelFiltering
-										       - WS_HotelReservation
+### III. SERVER TOMCAT 7.0
 
-6- Selectionnez client.java dans WS_HotelCLient/Java Resources/src/ws.reservation/ Vous pouvez maintenant lancer le serveur.
+a) Sur la configuration de votre serveur Tomcat ```server.xml```, changé le port ouvert par le port 8081 :
+
+```
+<Connector connectionTimeout="20000" port="8081" protocol="HTTP/1.1" redirectPort="8443"/>
+```
+
+b) Ajoutez web-service ```WS_HotelReservation``` à votre serveur Tomcat en le définissant comme "Axis 2".
+
+c) Rajoutez les web-services ```WS_HotelFiltering``` et ```HotelAuthent``` à votre serveur Tomcat.
+
+d) lancez le serveur avec les 3 web-services.
+
+<br/>
+<br/>
+
+### IV. LE CLIENT
+
+a) Compilez et executez le Client (```WS_HotelCLient/src/ws.reservation/Client.java```).
 
 7- Un menu se lance : 
 	Dans un premier temps il nous invite à nous connecter nous vous avons créé des indentifiants :
@@ -41,5 +54,22 @@ Tutoriel :
        		1) Recherche des chambres d'hôtel par critères
        		2) Réserver un chambre d'hotel
 
-	Si aucune chambre n'est trouvée avec vos critère, on vous propose de faire une nouvelle recherche.
+	Si aucune chambre n'est trouvée avec vos critères, on vous propose de faire une nouvelle recherche.
 
+<br/>
+<br/>
+
+### V. BONUS Listes des routes
+
+Voici la liste des routes de nos web-services :
+
+WS_HotelFiltering :
+-	/filter/params:\<params>
+-	/reservation
+
+WS_HotelReservation :
+-	/listHotel  
+-	/makeReservation
+
+WS_HotelAuthent :  
+-	/connexion

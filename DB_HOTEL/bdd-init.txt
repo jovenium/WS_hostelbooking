@@ -71,7 +71,7 @@ INSERT INTO room (price, nb_place, hotel_id) VALUES (100, 2, 6);
 INSERT INTO customer (name, pwd) VALUES ('admin','admin');
 INSERT INTO customer (name, pwd) VALUES ('lucas','test');
 INSERT INTO customer (name, pwd) VALUES ('val','test');
-
+INSERT INTO customer (name, pwd) VALUES ('projetWeb','ensiie2020');
 
 INSERT INTO reservation(start_date, end_date, room_id, customer_id) VALUES ('2019-12-12', '2019-12-20', 1, 1);
 INSERT INTO reservation(start_date, end_date, room_id, customer_id) VALUES ('2019-12-12', '2019-12-20', 2, 1);
